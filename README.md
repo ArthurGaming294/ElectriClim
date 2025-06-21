@@ -1,7 +1,6 @@
 
 # ElectriClim
 
-![ElectriClim Logo](https://electriummc.fr/tools/tools/ElectriClim/static/logo.png)  
 *Gestion simplifiée de climatiseurs Tuya / SmartLife via une API et un dashboard web.*
 
 ---
