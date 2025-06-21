@@ -60,6 +60,11 @@ Les commandes s’utilisent via des URL simples / Commands are used via simple U
 Un script d'installation automatisé est disponible ici : / Automated install script is available here:  
 [https://electriummc.fr/tools/tools/electriclim/installer.sh](https://electriummc.fr/tools/tools/electriclim/installer.sh)
 
+## ⚙️ Mis à jour / Update
+
+Un script de mis à jour automatisé est disponible ici : / Automated update script is available here:  
+[https://electriummc.fr/tools/tools/electriclim/update.sh](https://electriummc.fr/tools/tools/electriclim/update.sh)
+
 ### Prérequis / Requirements
 
 - Python 3.6+ avec pip / Python 3.6+ with pip
