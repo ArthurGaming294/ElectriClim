@@ -1,0 +1,30 @@
+{
+  "cuisine": {
+    "name": "Clim Cuisine",
+    "id": "XXXXXXXXXXXXXXXXXXX",
+    "key": "XXXXXXXXXXXXXXXXXXX",
+    "ip": "XXX.XXX.X.XX",
+    "version": "3.3"
+  },
+  "salle": {
+    "name": "Clim salle",
+    "id": "XXXXXXXXXXXXXXXXXXX",
+    "key": "XXXXXXXXXXXXXXXXXXX",
+    "ip": "XXX.XXX.X.XX",
+    "version": "3.3"
+  },
+  "bureau": {
+    "name": "Clim bureau",
+    "id": "XXXXXXXXXXXXXXXXXXX",
+    "key": "XXXXXXXXXXXXXXXXXXX",
+    "ip": "XXX.XXX.X.XX",
+    "version": "3.3"
+  },
+  "arthur": {
+    "name": "Clim Arthur",
+    "id": "XXXXXXXXXXXXXXXXXXX",
+    "key": "XXXXXXXXXXXXXXXXXXX",
+    "ip": "XXX.XXX.X.XX",
+    "version": "3.3"
+  }
+}
