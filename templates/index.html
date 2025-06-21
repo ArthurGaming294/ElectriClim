@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clim Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+      background: #f0f4f8;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 350px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.3rem 0;
+    }
+
+    button, select, input[type="number"] {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.7rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .on {
+      color: green;
+      font-weight: bold;
+    }
+
+    .off {
+      color: red;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>❄️ Contrôle des Climatiseurs 🔥</h1>
+  <div class="grid">
+    {% for key, device in devices.items() %}
+      <div class="card">
+        <h2>{{ device.name }}</h2>
+
+        {% if status[key].error %}
+          <p class="error">Erreur : {{ status[key].error }}</p>
+        {% else %}
+
+          <p>État :
+            {% if status[key].on %}
+              <span class="on">Allumé ✅</span>
+            {% else %}
+              <span class="off">Éteint ❌</span>
+            {% endif %}
+          </p>
+          <form method="post" action="api/{{ key }}/toggle">
+            <button type="submit">🔁 Allumer / Éteindre</button>
+          </form>
+
+          <p>Température consigne :
+            {{ status[key].temp_set if status[key].temp_set is not none else 'N/A' }} °C
+          </p>
+          <form method="post" action="/set_temp/{{ key }}">
+            <input type="number" name="temp" step="0.5" min="16" max="30" required />
+            <button type="submit">🌡️ Définir Température</button>
+          </form>
+
+          <p>Vitesse vent :
+            {% set fan_speed = status[key].fan_speed %}
+            {% if fan_speed == 0 %}Auto
+            {% elif fan_speed == 1 %}Basse
+            {% elif fan_speed == 2 %}Moyenne
+            {% elif fan_speed == 3 %}Haute
+            {% else %}Inconnue
+            {% endif %}
+          </p>
+          <form method="post" action="/set_fan/{{ key }}">
+            <select name="fan_speed">
+              <option value="0">Auto</option>
+              <option value="1">Basse</option>
+              <option value="2">Moyenne</option>
+              <option value="3">Haute</option>
+            </select>
+            <button type="submit">💨 Changer Vitesse</button>
+          </form>
+
+          <p>Mode :
+          {% set mode = status[key].mode %}
+          {% if mode == 0 %}🔁 Auto
+          {% elif mode == 1 %}❄️ Froid
+          {% elif mode == 2 %}🔥 Chaud
+          {% elif mode == 3 %}💧 Déshumidification
+          {% elif mode == 4 %}🌬️ Ventilation
+          {% else %}❓ Inconnu
+          {% endif %}
+          </p>
+          <form method="post" action="/set_mode/{{ key }}">
+            <select name="mode">
+                <option value="1">❄️ Froid</option>
+                <option value="2">🔥 Chaud</option>
+              </select>
+            <button type="submit">Changer Mode</button>
+          </form>
+
+          <p>Température pièce :
+            {{ status[key].temp_room if status[key].temp_room is not none else 'N/A' }} °C
+          </p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
